@@ -1,7 +1,7 @@
 require_relative 'logic.rb'
 require_relative 'messages.rb'
 
-class CodeBreaker
+class CodeMaker
     include Logic
     include Messages
 
