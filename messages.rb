@@ -1,17 +1,9 @@
 module Messages
-    def message_alert(type)
-        case type
-        when 'ask_for_input'
-            "Write out 4 digits from 1-6 (unspaced):"
-        end
-    end
+    # rounds
+    HOW_MANY_ROUNDS = "How many rounds would you like? (6 - 12)"
+    INVALID_ROUNDS = "Amount of rounds need to be between 6 and 12."
 
-    def message_warning(type)
-        case type
-        when 'invalid_option'
-            "This is an invalid option"
-        when 'invalid_combination'
-            "This is an invalid combination."
-        end
-    end
+    # combination
+    ASK_FOR_COMBINATION = "Write out 4 digits from 1-6 (unspaced):"
+    INVALID_COMBINATION = "This is an invalid combination."
 end

@@ -1,27 +1,44 @@
-require_relative 'messages.rb'
 module Logic
     def random_combination
         (Array.new(4) { rand(1..6) }).join()
     end
 
-    def get_combination_input
-        puts message_alert('ask_for_input')
-        input = gets.chomp
-
-        unless input.match(/^[1-6]{4}$/) 
-            puts message_warning('invalid_combination')
-            get_combination_input()
-        end
-        return input
+    def compare_combination(guess_comb, actual_comb)
+        guess = guess_comb.dup
+        actual = actual_comb.dup
+        result = {
+            "correct" => check_for_correctspots(guess, actual),
+            "misplaced" => check_for_misplacedspots(guess, actual)
+        }
+        return result
     end
 
-    def compare_combination(guess_comb, actual_comb)
-        correct_spots = 0; misplaced_spots = 0;
-        # check for correct spots
+    private
+    def check_for_correctspots(guess, actual)
+        amount = 0
         4.times do |index|
-            correct_spots += 1 if guess_comb[index] == actual_comb[index]
+            if guess[index] == actual[index]
+                amount += 1 
+                guess[index] = "*"
+                actual[index] = "*"
+            end
         end
-        # check for misplaced spots
-        # return number of correct and misplaced spots
+        return amount
+    end
+
+    def check_for_misplacedspots(guess, actual)
+        amount = 0
+        4.times do |index_of_guess|
+            4.times do |index_of_actual|
+                next if index_of_guess == index_of_actual
+                
+                if guess[index_of_guess] == actual[index_of_actual] and (guess[index_of_guess] != "*" and actual[index_of_actual] != "*")
+                    amount += 1
+                    guess[index_of_guess] = "*"
+                    actual[index_of_actual] = "*"
+                end
+            end
+        end
+        return amount
     end
 end
