@@ -1,12 +1,14 @@
 require_relative 'user_io.rb'
 require_relative 'codebreaker.rb'
+require_relative 'messages.rb'
 
 class Mastermind
-    INTRO = "Welcome to Mastermind, lets crack the code!"
+    include Messages
 
     def play
         puts INTRO
-        breaker = CodeBreaker.new(UserIO.set_rounds)
+        puts INSTRUCTIONS
+        breaker = CodeBreaker.new(UserIO.rounds?)
         breaker.start()
     end
 end

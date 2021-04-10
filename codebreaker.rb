@@ -8,18 +8,18 @@ class CodeBreaker
         @code = random_combination()
         @rounds = rounds
         @player_input = nil
-        @game_status = "playing"
+        @game_status = "lost"
     end
 
     def start
-        puts "THE CODE IS #{@code}"
         @rounds.times do
             play_round()
         end
 
-        lose()
+        finish()
     end
 
+    private
     def play_round
         get_input()
         compare_and_print_results()
@@ -31,20 +31,19 @@ class CodeBreaker
 
     def compare_and_print_results
         comparison = compare_combination(@player_input, @code)
-        @game_status = "won" if comparison["correct"] == 4
+        UserIO.print_comparison(comparison)
 
-        if @game_status == "won"
-            win()
+        @game_status = "won" if comparison["correct"] == 4
+        finish() if @game_status == "won"
+    end
+
+    def finish
+        UserIO.finished(@game_status)
+        if UserIO.play_again?
+            return nil # :/
         else
-            UserIO.print_comparison(comparison)
+            return nil # :/
         end
     end
-
-    def win
-        
-    end
-
-    def lose
-
-    end
+    
 end
