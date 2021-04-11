@@ -1,6 +1,9 @@
 require_relative 'messages.rb'
 class UserIO
     include Messages
+    def self.clear_screen
+        puts `clear`
+    end
 
     def self.rounds?
         puts HOW_MANY_ROUNDS
@@ -33,19 +36,4 @@ class UserIO
         puts WIN if status == "won"
         puts LOSE if status == "lost"
     end
-
-    def self.play_again?
-        puts PLAY_AGAIN
-        input = gets.chomp.downcase
-
-        if input == "y"
-            return true
-        elsif input == "n"
-            return false
-        else
-            puts INVALID INPUT
-            self.play_again?
-        end
-    end
-
 end

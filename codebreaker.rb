@@ -39,11 +39,7 @@ class CodeBreaker
 
     def finish
         UserIO.finished(@game_status)
-        if UserIO.play_again?
-            return nil # :/
-        else
-            return nil # :/
-        end
+        exit(0)
     end
     
 end

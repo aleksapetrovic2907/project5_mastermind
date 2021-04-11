@@ -6,6 +6,7 @@ class Mastermind
     include Messages
 
     def play
+        UserIO.clear_screen
         puts INTRO
         puts INSTRUCTIONS
         breaker = CodeBreaker.new(UserIO.rounds?)
